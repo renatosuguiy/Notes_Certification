@@ -1,4 +1,4 @@
-
+#databricks #certification #cloud 
 ## Section 1: Databricks Lakehouse Platform
 - Describe the relationship between the data lakehouse and the data warehouse
 - Identify the improvement in data quality in the data lakehouse over the data lake.
