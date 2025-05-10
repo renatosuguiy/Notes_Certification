@@ -90,6 +90,38 @@
 		
 - Table Constrains. Validate only new data.
 	- ALTER TABLE {TABLE_NAME} ADD CONSTRAINT {CONSTRAIN_NAME} CHECK (DATA > '2025-01-01')
+
+### Cleaning Data
+	N/A
+### Complex Transformations 
+- Working with JSON. 
+	- ":" Syntax: queries to access subfields in JSON Strings
+	- "." syntax: queries to access subfields in struct types
+	- `schema_of_json()`: returns the schema derived from an example JSON string
+	- `from_json()`:  parses a column containing a JSON string into a STRUCT type using the specified schema 
+	- `explode()`: separates the elements of an array into multiple rows. this creates a new row for each element 
+	- `size()`: provides a count for the number of elements in an array each row 
+	- `collect_set()`: collect all unique values in a group, including arrays. 
+	- `flatten()`: pull all items into a single array
+	- `array_distinct()`: get the unique values of the array
+### Sql UDF	
+- Databricks recommends sql udfs rather than python udfs 
+- Create function:
+	 ```
+		CREATE OR REPLACE FUNCTION <function name> (var type, var2 type2)
+		RETURNS type
+		RETURN concat();
+	```
+
+### Advanced Data Lake Features
+- Liquid Clustering 
+	- Enable liquid clustering in a table: 
+	 `CREATE OR REPLACE TABLE events_liquid CLUSTER BY (USER_ID) AS SELECT * FROM events`
+	　`ALTER TABLE events CLUSTER BY (user_id)`
+- The cluster keys used in the liquid clustering usually are the ones that you use to filter. 
+- To trigger Liquid Clustering:
+	`OPTIMIZE events`
+	- Optimize is incremental, so it runs fast and should be schedule in a job 
 ## Section 2: ELT with Apache Spark
 
 - Extract data from a single file and from a directory of files ● 
