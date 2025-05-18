@@ -152,6 +152,17 @@
 - Use CASE/WHEN in SQL code. ●
 - Leverage CASE/WHEN for custom control flow. 
 
+### Jobs Compute
+- N/A
+### Jobs Features 
+- Late Jobs: Jobs that take longer than expected are killed
+- DAB (Databricks Asset Bundles): Collection of Databricks artifacts and assets. They are 
+represented as configuration files
+ - Job Parameters: Parameter that are passed into each task within a job. 
+ - Job Contexts: Special set of templated variables that provide introspective metadata on the job and task run. 
+ - Task Values: Custom parameters that can be shared between tasks in a databricks job 
+ - Repair Run: If change the parameter with the repair run parameter, the change is only temporary, only for that run
+
 ## Section 3: Incremental Data Processing 
 - Identify where Delta Lake provides ACID transactions ● 
 - Identify the benefits of ACID transactions. ● 
