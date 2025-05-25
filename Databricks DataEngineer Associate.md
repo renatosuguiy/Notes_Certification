@@ -203,7 +203,33 @@ represented as configuration files
 - Explain change data capture and the behavior of APPLY CHANGES INTO ● 
 - Query the events log to get metrics, perform audit loggin, examine lineage. ● 
 - Troubleshoot DLT syntax: Identify which notebook in a DLT pipeline produced an error, identify the need for LIVE in create statement, identify the need for STREAM in from clause. 
+### The medallion Architecture 
+- Bronze
+- Silver
+- Gold
 
+### Introduction to Delta Live Tables (DLT)
+- It's proprietary
+- Materialized View: Defined by a SQL query and Created and kept up-to-date by a pipeline
+```
+CREATE OR REFRESH MATERIALIZED VIEW report
+AS 
+SELECT country, sum(profit)
+FROM LIVE.sales => Live is mandatory. It's the last run of the ingestion. 
+GROUP BY country
+```
+- SQL STREAM() => append only. They are stateful, they remember the last run. 
+```
+CREATE STREAMING TABLE mystream
+AS SELECT * 
+FROM STREAM(LIVE.my_table)
+```
+- Use DTL => It has a Development and Production mode. It detects dependencies of notebooks. 
+	- Create live table
+	- Create a pipeline 
+	- Click start. 
+- Ensure correctness with Expectations, using constraints. There are 3 types of handle:
+	- Track, Drop and Abort
 ## Section 4: Production Pipelines 
 - Identify the benefits of using multiple tasks in Jobs. ● 
 - Set up a predecessor task in Jobs. ●
