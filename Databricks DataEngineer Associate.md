@@ -230,6 +230,20 @@ FROM STREAM(LIVE.my_table)
 	- Click start. 
 - Ensure correctness with Expectations, using constraints. There are 3 types of handle:
 	- Track, Drop and Abort
+### How can i do change data capture (CDC)
+- Merge don't apply to Delta Live Tables. 
+ ```sql
+ APPLY CHANGES INTO LIVE.cities
+	FROM STREAM(LIVE.city_updates)
+	KEYS (id)
+	APPLY AS DELETE WHEN flag = 1
+	SEQUENCE BY ts
+ ```
+- Have to order the data.
+- Inserts, Updates are automatic 
+- Deletes have to be specified 
+- 
+
 ## Section 4: Production Pipelines 
 - Identify the benefits of using multiple tasks in Jobs. ● 
 - Set up a predecessor task in Jobs. ●
